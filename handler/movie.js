@@ -18,8 +18,11 @@ async function fetchSingleMovie(req,res){
         data:movie
     })
 }
+
+
+
 async function filterBy(req,res){
-    const {t,sort} = req.query;
+    const {t,rating,sort} = req.query;
     
     let movie;
     if(t){
@@ -28,6 +31,10 @@ async function filterBy(req,res){
     } 
     else if(sort!=undefined){
          movie =  (sort=="title") ? await Movie.find().sort({title:1}) : await Movie.find().sort({rating:1}) ;
+    }
+    else if(rating!=undefined)
+    {
+        movie = await Movie.find({rating:rating})
     }
 
 
