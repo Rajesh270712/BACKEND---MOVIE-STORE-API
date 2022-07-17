@@ -27,7 +27,7 @@ async function filterBy(req,res){
     let movie;
     if(t){
         console.log(t,sort)
-         movie = await Movie.find({title:t})
+         movie = await Movie.find({title : {$regex:t}})
     } 
     else if(sort!=undefined){
          movie =  (sort=="title") ? await Movie.find().sort({title:1}) : await Movie.find().sort({rating:1}) ;
